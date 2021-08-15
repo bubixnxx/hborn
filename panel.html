@@ -1,8 +1,12 @@
 <section id="BOT_Panel">
-    <article class="BOT_box">
-        <header id="BOT_header">BOT</header>
-        <div class="BOT_cont BOT_exp">
-            <ul class="BOT_options">
+    <article class="BOT_box BOT_exp">
+        <header class="BOT_header">HIPER BOT <h6 class="BOT_version"></h6></header>
+        <div class="BOT_cnt">
+            <ul>
+                <li class="BOT_real_lvl_box">
+                    Realny Poziom: <span class="BOT_real_lvl"></span>
+                    <button class="BOT_calc_Lvl">PRZELICZ</button>
+                </li>
                 <li>
                     <input type="checkbox" id="usesenzu" name="usesenzu">
                     <label for="usesenzu">Używaj Senzu</label>
@@ -35,18 +39,20 @@
                         </label>
                     </div>
                 </li>
-                <li>
+                <li class="inline">
                     <input type="checkbox" id="ssj" name="ssj">
                     <label for="ssj">Używaj SSJ</label>
                 </li>
-                <li>
+                <li class="inline">
                     <input type="checkbox" id="multi" name="multi">
                     <label for="multi">Multiwalka</label>
                 </li>
             </ul>
             <div class="cooldown">--:--:--</div>
-            <button class="start">START</button>
-            <button class="resume">WZNÓW</button>
+            <div class="BOT_start_panel">
+                <button class="start">START</button>
+                <button class="resume">WZNÓW</button>
+            </div>
         </div>
     </article>
 </section>

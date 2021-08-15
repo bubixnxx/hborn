@@ -1,3 +1,185 @@
-#BOT{
-  background:black;
+#BOT_Panel{
+    position:fixed;
+    right:5px;
+    top:50px;
+    z-index:9999;
+    width:340px;
+    color:white;
+    user-select:none; 
+}
+
+#BOT_Panel .BOT_box{
+    background:rgba(0,0,0,0.9);
+    width:340px;
+    min-height:50px;
+    position:relative;
+    border-style:solid;
+    border-width:7px 8px 7px 7px;
+    border-image:url("https://s12.kosmiczni.pl/gfx/layout/mapborder.png") 7 8 7 7 fill;
+    border-radius: 5px;
+}
+
+#BOT_Panel .BOT_box .BOT_header{
+    background-image:url("https://s12.kosmiczni.pl/gfx/layout/belkaSekcja.png");
+    background-size:100% 100%;
+    width:310px;
+    height:27px;
+    line-height:27px;
+    position:absolute;
+    top:-20px;
+    left:0;
+    right:0;
+    border-radius: 5px;
+    margin:auto;
+    margin-bottom:5px;
+    cursor:move;
+    text-align:center;
+    text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#BOT_Panel .BOT_box .BOT_header .BOT_version{
+    display:inline-block;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt{
+    padding:10px 5px 0px 5px;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt ul{
+    list-style:none;
+    margin:0 0 5px 0;
+    padding:0px;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt ul li{
+    background:linear-gradient(to right,rgb(33 125 146 / 40%),rgb(16 16 16 / 89%),rgb(33 125 146 / 40%));
+    box-shadow:0 4px 2px -2px #ffffff40;
+    padding:5px;
+    margin-bottom:5px;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt ul li.inline{
+    width:calc(50% - 2px);
+    position:relative;
+    display:inline-block;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt ul li label{
+    position: absolute;
+    margin:1.9px 0px 0px 5px;
+    padding:0px;
+    font-size: 15px;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt ul li [type=checkbox]{
+    width:17px;
+    height:17px;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt button.BOT_calc_Lvl{
+    background: linear-gradient(to right,rgb(27 127 150 / 40%),rgb(70 70 70 / 48%),rgb(27 127 150 / 40%));
+    border:none;
+    padding:0px 5px 0px 5px;
+    margin:0px;
+    float:right;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt button.BOT_calc_Lvl:active:focus, .BOT_calc_Lvl:hover{
+    outline: none;
+    color:#00fff3fc;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt .BOT_senzu{
+    float:right;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt .BOT_senzu label{
+    position:relative;
+    margin:-2px 0px 0px 0px;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt .BOT_senzu [type=radio]{ 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+#BOT_Panel .BOT_box .BOT_cnt .BOT_senzu [type=radio] + img{
+    cursor: pointer;
+    width:30px;
+    height:30px;
+}
+  
+#BOT_Panel .BOT_box .BOT_cnt .BOT_senzu [type=radio]:checked + img{
+    outline: 1px solid rgb(255, 255, 255);
+}
+
+#BOT_Panel .BOT_box .BOT_cnt .BOT_sub{
+    float:right;
+    text-align:center;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt .BOT_sub label{
+    position:relative;
+    margin:-2px 0px 0px 0px;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt .BOT_sub [type=radio]{ 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+#BOT_Panel .BOT_box .BOT_cnt .BOT_sub [type=radio] + span{
+    cursor: pointer;
+    min-width:50px;
+    display:inline-block;
+    background:linear-gradient(to right,rgb(27 127 150 / 40%),rgb(70 70 70 / 48%),rgb(27 127 150 / 40%));
+    color:white;
+    padding:5px;
+}
+  
+#BOT_Panel .BOT_box .BOT_cnt .BOT_sub [type=radio]:checked + span{
+    color:#00fff3fc;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt .cooldown{
+    background:#fff92ed9;
+    color:#000000;
+    padding:0px;
+    border-bottom:solid 1px rgb(10 10 10 / 70%);
+    text-align:center;
+    font-weight:bold;
+    display:none;
+}
+
+#BOT_Panel .BOT_start_panel{
+    display:flex;
+}
+
+#BOT_Panel .BOT_start_panel button{
+    background:#6fff339e;
+    text-shadow:0 0 3px #000000;
+    border:none;
+    display:flexbox;
+    width:100%;
+    cursor:pointer;
+    padding:5px;
+}
+
+#BOT_Panel .BOT_start_panel button.stop{
+    background:#fd0f0f9e;
+}
+
+#BOT_Panel .BOT_start_panel button:active:focus, #BOT_Panel .BOT_start_panel button:hover{
+    outline: none;
+    color:#fbff00;
+    text-shadow: 0 0 3px #640101;
+}
+
+#BOT_Panel .BOT_start_panel button.resume{
+    border-left: solid 1px rgba(10, 10, 10, 0.384);
+    display:none;
 }
