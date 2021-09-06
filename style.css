@@ -41,6 +41,28 @@
     display:inline-block;
 }
 
+#BOT_Panel .BOT_box .BOT_header .BOT_mapper{
+    display:inline-block;
+    position:absolute;
+    left:7px;
+    top:-2px;
+    animation: pulse 2s infinite;
+    display:none;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0px 0px 0px 0px rgba(255, 255, 0, 0.205);
+    }
+    50% {
+        box-shadow: 0px 0px 10px 0px rgba(255, 255, 0, 1);
+        background:rgba(255, 255, 0, 0.39);
+    }
+    100% {
+        box-shadow: 0px 0px 0px 0px rgba(255, 255, 0, 0.205);
+    }
+  }
+
 #BOT_Panel .BOT_box .BOT_cnt{
     padding:10px 5px 0px 5px;
 }

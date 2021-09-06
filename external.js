@@ -22,8 +22,8 @@ BOT.Start = () => {
     if (BOT.last_location != GAME.char_data.loc) {
         !GAME.mapcell ? BOT.SetMapcell() : false;  
         BOT.last_location = parseInt(GAME.char_data.loc);
-        BOT.location = BOT.SetLocation(BOT.last_location);
         BOT.SetMatrix();
+        BOT.location = BOT.SetLocation(BOT.last_location);
     }
 
     BOT.cd_start = Date.now();
@@ -34,7 +34,7 @@ BOT.Start = () => {
         BOT.moveSteps.shift();
     }
 
-    setTimeout(() => { BOT.Go(); }, 500);
+    setTimeout(() => { BOT.Go(); }, 1000);
 }
 
 BOT.SetMapcell = () => {
@@ -49,7 +49,9 @@ BOT.SetLocation = (id) => {
         loc.y = loc.steps[0][1];
     }
 
-    return !loc ? /*BOT.AutoMapper()*/ console.log("automapper") : loc;
+    $(".BOT_mapper").fadeOut();
+
+    return !loc ? BOT.AutoMapper() : loc;
 }
 
 BOT.SetMatrix = () => {
@@ -62,6 +64,40 @@ BOT.SetMatrix = () => {
     }
     
     BOT.finder.setGrid(BOT.matrix);
+}
+
+BOT.AutoMapper = () => {
+    let steps = [];
+    let first = false;
+    let reverse = false;
+
+    for (y = 0; y < BOT.matrix.length; y++) {
+        if (BOT.matrix[y].includes(1)) {
+            if (!reverse) {        
+                for (x = 0; x < BOT.matrix[y].length; x++) {
+                    if (BOT.matrix[y][x] === 1){
+                        !first ? first = [x+1,y+1] : false;
+                        steps.push([x+1,y+1]);
+                    }
+                }
+                reverse = true;
+            } else {    
+                for (x = BOT.matrix[y].length; x > 0; x--) {
+                    if (BOT.matrix[y][x-1] === 1){
+                        !first ? first = [x,y+1] : false;
+                        steps.push([x,y+1]);
+                    }
+                }
+                reverse = false;
+            }
+        }
+    }
+
+    //let steps = BOT.CompressSteps(steps); 
+
+    steps.push(first);
+    $(".BOT_mapper").fadeIn();
+    return { x: first[0], y: first[1], steps: steps }
 }
 
 BOT.GetCooldown = (start, end) => {
@@ -140,30 +176,44 @@ BOT.RealLevel = () => {
     $(".BOT_real_lvl").html(`${GAME.rebPref(GAME.char_data.reborn)}${GAME.lvlUpSim()}`);
 }
 
+BOT.MobsNum = () => {
+    const mob_index = GAME.field_mobs.findIndex(field_mob => {
+        return field_mob.ranks.some((rank, index) => { return GAME.map_options.ma[index] && rank > 0 })
+    });
+
+	if (mob_index === -1) {
+        return 0;
+    } else {
+        return mob_index;
+    }
+}
+
 BOT.CountMobs = (cm=false) => {
     let r = 0;
     
     for (i in GAME.map_options.ma){
         if (GAME.map_options.ma[i] == 1) {
-            r+= parseInt(GAME.field_mobs[0].ranks[i]);
+            r += parseInt(GAME.field_mobs[BOT.MobsNum()].ranks[i]);
         }
     }
 
-    r += cm ? parseInt(GAME.field_mobs[0].ranks[5]) : 0;
+    r += cm ? parseInt(GAME.field_mobs[BOT.MobsNum()].ranks[5]) : 0;
 
     return r;
 }
 
 BOT.Fight = () => {
     if (BOT.char.multifight) {
-        if (BOT.CountMobs() > 0 && GAME.field_mf < 3) {
+        if (BOT.CountMobs() > 0 && GAME.field_mf[BOT.MobsNum()] < 2) {
             BOT.emit({a:7,order:2,quick:1,fo:GAME.map_options.ma}); // kill from the strongest to set multifight
-        } else if (GAME.map_options.ma[4] === 1 && GAME.field_mobs[0].ranks[4]) {
-            BOT.emit({a: 7, mob_num: 0, rank: 4, quick: 1}); // kill epic if exists
-        } else if (GAME.field_mobs[0].ranks[5]) {
-            BOT.emit({a: 7, mob_num: 0, rank: 5, quick: 1}); // kill mystic if exists
+        } else if (GAME.field_mf[BOT.MobsNum()] < 3 && GAME.map_options.ma[3] === 1 && GAME.field_mobs[BOT.MobsNum()].ranks[3]) {
+            BOT.emit({a: 7, mob_num: BOT.MobsNum(), rank: 3, quick: 1}); // kill legend if exists
+        } else if (GAME.map_options.ma[4] === 1 && GAME.field_mobs[BOT.MobsNum()].ranks[4]) {
+            BOT.emit({a: 7, mob_num: BOT.MobsNum(), rank: 4, quick: 1}); // kill epic if exists
+        } else if (GAME.field_mobs[BOT.MobsNum()].ranks[5]) {
+            BOT.emit({a: 7, mob_num: BOT.MobsNum(), rank: 5, quick: 1}); // kill mystic if exists
         } else {
-            BOT.emit({a: 13, mob_num: 0, fo: GAME.map_options.ma}) // multifight
+            BOT.emit({a: 13, mob_num: BOT.MobsNum(), fo: GAME.map_options.ma}) // multifight
         }
     } else {
         BOT.emit({a:7,order:2,quick:1,fo:GAME.map_options.ma});
@@ -235,10 +285,6 @@ BOT.HandleChbox = (chb) => {
         case "use_sub": BOT.sub.which = parseInt(chb.val()); break;
         case "ssj": BOT.char.ssj = chb.is(':checked') ? true : false; break;
     }
-
-    console.log(BOT.senzu);
-    console.log(BOT.sub);
-    console.log(BOT.char);
 }
 
 GAME.socket.on('gr', (res) => {
@@ -296,4 +342,5 @@ $(".BOT_box .resume").click(() => {
 $(".BOT_box .BOT_calc_Lvl").click(() => {
     BOT.RealLevel();
 });
-
+console.clear();
+console.log('%cSkrypt został poprawnie załadowany!','color: #fff; width:100%; background: #05d30f; padding: 5px; font-size:20px;');
