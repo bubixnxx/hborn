@@ -176,44 +176,32 @@ BOT.RealLevel = () => {
     $(".BOT_real_lvl").html(`${GAME.rebPref(GAME.char_data.reborn)}${GAME.lvlUpSim()}`);
 }
 
-BOT.MobsNum = () => {
-    const mob_index = GAME.field_mobs.findIndex(field_mob => {
-        return field_mob.ranks.some((rank, index) => { return GAME.map_options.ma[index] && rank > 0 })
-    });
-
-	if (mob_index === -1) {
-        return 0;
-    } else {
-        return mob_index;
-    }
-}
-
 BOT.CountMobs = (cm=false) => {
     let r = 0;
     
     for (i in GAME.map_options.ma){
         if (GAME.map_options.ma[i] == 1) {
-            r += parseInt(GAME.field_mobs[BOT.MobsNum()].ranks[i]);
+            r += parseInt(GAME.field_mobs[0].ranks[i]);
         }
     }
 
-    r += cm ? parseInt(GAME.field_mobs[BOT.MobsNum()].ranks[5]) : 0;
+    r += cm ? parseInt(GAME.field_mobs[0].ranks[5]) : 0;
 
     return r;
 }
 
 BOT.Fight = () => {
     if (BOT.char.multifight) {
-        if (BOT.CountMobs() > 0 && GAME.field_mf[BOT.MobsNum()] < 2) {
+        if (BOT.CountMobs() > 0 && GAME.field_mf[0] < 2) {
             BOT.emit({a:7,order:2,quick:1,fo:GAME.map_options.ma}); // kill from the strongest to set multifight
-        } else if (GAME.field_mf[BOT.MobsNum()] < 3 && GAME.map_options.ma[3] === 1 && GAME.field_mobs[BOT.MobsNum()].ranks[3]) {
-            BOT.emit({a: 7, mob_num: BOT.MobsNum(), rank: 3, quick: 1}); // kill legend if exists
-        } else if (GAME.map_options.ma[4] === 1 && GAME.field_mobs[BOT.MobsNum()].ranks[4]) {
-            BOT.emit({a: 7, mob_num: BOT.MobsNum(), rank: 4, quick: 1}); // kill epic if exists
-        } else if (GAME.field_mobs[BOT.MobsNum()].ranks[5]) {
-            BOT.emit({a: 7, mob_num: BOT.MobsNum(), rank: 5, quick: 1}); // kill mystic if exists
+        } else if (GAME.field_mf[0] < 3 && GAME.map_options.ma[3] === 1 && GAME.field_mobs[0].ranks[3]) {
+            BOT.emit({a: 7, mob_num: 0, rank: 3, quick: 1}); // kill legend if exists
+        } else if (GAME.map_options.ma[4] === 1 && GAME.field_mobs[0].ranks[4]) {
+            BOT.emit({a: 7, mob_num: 0, rank: 4, quick: 1}); // kill epic if exists
+        } else if (GAME.field_mobs[0].ranks[5]) {
+            BOT.emit({a: 7, mob_num: 0, rank: 5, quick: 1}); // kill mystic if exists
         } else {
-            BOT.emit({a: 13, mob_num: BOT.MobsNum(), fo: GAME.map_options.ma}) // multifight
+            BOT.emit({a: 13, mob_num: 0, fo: GAME.map_options.ma}) // multifight
         }
     } else {
         BOT.emit({a:7,order:2,quick:1,fo:GAME.map_options.ma});
@@ -294,11 +282,7 @@ GAME.socket.on('gr', (res) => {
         if (BOT.CountMobs(true) == 0) {
             BOT.Next();
         } else {
-            if (BOT.senzu.use && GAME.char_data.pr <= BOT.char.min_pa) {
-                setTimeout(() => { BOT.UseSenzu(); }, 1000);
-            } else {
-                BOT.Fight();
-            }
+            BOT.Fight();
         }
     } else if (!BOT.stop && res.a === 12 && res.type === 14) { // Use senzu respone
         setTimeout(() => { BOT.Go(); }, 1000);
