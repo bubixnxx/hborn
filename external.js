@@ -294,7 +294,11 @@ GAME.socket.on('gr', (res) => {
         if (BOT.CountMobs(true) == 0) {
             BOT.Next();
         } else {
-            BOT.Fight();
+            if (BOT.senzu.use && GAME.char_data.pr <= BOT.char.min_pa) {
+                setTimeout(() => { BOT.UseSenzu(); }, 1000);
+            } else {
+                BOT.Fight();
+            }
         }
     } else if (!BOT.stop && res.a === 12 && res.type === 14) { // Use senzu respone
         setTimeout(() => { BOT.Go(); }, 1000);
