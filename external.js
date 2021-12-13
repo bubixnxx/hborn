@@ -330,7 +330,7 @@ $(".BOT_box .BOT_calc_Lvl").click(() => {
 });
 console.clear();
 console.log('%cSkrypt został poprawnie załadowany!','color: #fff; width:100%; background: #05d30f; padding: 5px; font-size:20px;');
-$('body script:last-child').remove();
+$("script").last().remove();
 
 const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743];
 
