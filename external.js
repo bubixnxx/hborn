@@ -258,8 +258,8 @@ BOT.PreparePanel = () => {
     $( "#BOT_Panel" ).draggable({ handle: ".BOT_header" });
     $(".BOT_cnt input[type=checkbox], input[type=radio]").change((chb) => { BOT.HandleChbox($(chb.target)); });
 
-    $(".range_slider input[type=range]").val(GAME.dots(BOT.char.min_pa));
-    $(".minpa_val").html(`PA: ${BOT.char.min_pa}`);
+    $(".range_slider input[type=range]").val(BOT.char.min_pa);
+    $(".minpa_val").html(`PA: ${GAME.dots(BOT.char.min_pa)}`);
 
     BOT.RealLevel();
 }
