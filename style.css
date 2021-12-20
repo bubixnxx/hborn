@@ -93,6 +93,18 @@
     font-size: 15px;
 }
 
+#BOT_Panel .BOT_box .BOT_cnt ul li.range_slider label{
+    text-align:center;
+    font-size: 12px;
+    display:block;
+    margin-left:0px;
+    position:relative !important;
+}
+
+#BOT_Panel .BOT_box .BOT_cnt ul li.range_slider label.minpa_val{
+    display:none;
+}
+
 #BOT_Panel .BOT_box .BOT_cnt ul li [type=checkbox]{
     width:17px;
     height:17px;

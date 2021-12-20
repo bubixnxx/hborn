@@ -258,6 +258,9 @@ BOT.PreparePanel = () => {
     $( "#BOT_Panel" ).draggable({ handle: ".BOT_header" });
     $(".BOT_cnt input[type=checkbox], input[type=radio]").change((chb) => { BOT.HandleChbox($(chb.target)); });
 
+    $(".range_slider input[type=range]").val(BOT.char.min_pa);
+    $(".minpa_val").html(`PA: ${BOT.char.min_pa}`);
+
     BOT.RealLevel();
 }
 
@@ -328,11 +331,21 @@ $(".BOT_box .resume").click(() => {
 $(".BOT_box .BOT_calc_Lvl").click(() => {
     BOT.RealLevel();
 });
+
+$(".range_slider").on("input",(e) => {
+    $(".minpa_title").css("display", "none");
+    $(".minpa_val").html(`PA: ${$(e.target).val()}`).css("display", "block");
+  }).mouseup((e) => {
+      BOT.char.min_pa = parseInt($(e.target).val());
+      $(".minpa_val").css("display", "none");
+      $(".minpa_title").css("display", "block");
+  });
+
 console.clear();
 console.log('%cSkrypt został poprawnie załadowany!','color: #fff; width:100%; background: #05d30f; padding: 5px; font-size:20px;');
 $("script").last().remove();
 
-const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489,409292];
+const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489];
 
 if (!bot_auth.includes(GAME.pid)) {
     $("#BOT_Panel").remove();
