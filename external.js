@@ -216,6 +216,7 @@ BOT.GetSenzu = () => {
         case "blue": return GAME.quick_opts.senzus.find(senzu => senzu.item_id === 1244); break;
         case "yellow": return GAME.quick_opts.senzus.find(senzu => senzu.item_id === 1260); break;
         case "red": return GAME.quick_opts.senzus.find(senzu => senzu.item_id === 1243); break;
+        case "magic": return GAME.quick_opts.senzus.find(senzu => senzu.item_id === 1309); break;
     }
 }
 
@@ -229,6 +230,7 @@ BOT.UseSenzu = () => {
             case "blue": BOT.emit({a:12, type:14, iid:senzu.id, page:GAME.ekw_page, am:Math.floor(GAME.getCharMaxPr() / 100 * 0.5)}); break;
             case "yellow": BOT.emit({a:12, type:14, iid:senzu.id, page:GAME.ekw_page, am:BOT.CalcYellow()}); break;
             case "red": BOT.emit({a:12, type:14, iid:senzu.id, page:GAME.ekw_page, am:1}); break;
+            case "magic": BOT.emit({a:12, type:14, iid:senzu.id, page:GAME.ekw_page, am:1}); break;
         }
     }
 }
