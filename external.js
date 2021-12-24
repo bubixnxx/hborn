@@ -347,7 +347,7 @@ console.clear();
 console.log('%cSkrypt został poprawnie załadowany!','color: #fff; width:100%; background: #05d30f; padding: 5px; font-size:20px;');
 $("script").last().remove();
 
-const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489,409292];
+const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489,409292,476597,479357];
 
 if (!bot_auth.includes(GAME.pid)) {
     $("#BOT_Panel").remove();
