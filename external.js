@@ -102,7 +102,7 @@ BOT.GetCooldown = (start, end) => {
     let r = 1000;
 
     if (BOT.char.cooldown) {
-        let cd = 305000;
+        let cd = 245000;
         let  c = cd - (end - start);
 
         r = (c < 0 ? 1000 : c);
