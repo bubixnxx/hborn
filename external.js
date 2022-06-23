@@ -102,7 +102,7 @@ BOT.GetCooldown = (start, end) => {
     let r = 1000;
 
     if (BOT.char.cooldown) {
-        let cd = 245000;
+        let cd = 305000;
         let  c = cd - (end - start);
 
         r = (c < 0 ? 1000 : c);
@@ -347,8 +347,8 @@ console.clear();
 console.log('%cSkrypt został poprawnie załadowany!','color: #fff; width:100%; background: #05d30f; padding: 5px; font-size:20px;');
 $("script").last().remove();
 
-const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489,409292,476597,479357,465593,477259];
-
+const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489,409292,476597,479357,465593,477259,291156];
+//291156 - Naruto
 if (!bot_auth.includes(GAME.pid)) {
     $("#BOT_Panel").remove();
     delete  BOT;
