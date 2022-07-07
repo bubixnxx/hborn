@@ -348,7 +348,7 @@ console.log('%cSkrypt został poprawnie załadowany!','color: #fff; width:100%; 
 $("script").last().remove();
 
 const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489,409292,476597,479357,465593,477259,291156,322483];
-//291156 - Naruto, 322483 - Goldas
+//291156 - Naruto, 322483, 480606 - Goldas
 if (!bot_auth.includes(GAME.pid)) {
     $("#BOT_Panel").remove();
     delete  BOT;
