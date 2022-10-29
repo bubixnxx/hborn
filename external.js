@@ -140,7 +140,7 @@ BOT.Move = () => {
         } else if (BOT.sub.use && $("#doubler_bar").css("display") === "none") {
             setTimeout(() => { BOT.UseSub(); }, 1000);
         } else if (BOT.char.ssj && ($("#ssj_bar").css("display") === "none" || $('#ssj_status').text() == "--:--:--")) {
-            setTimeout(() => { BOT.UseSSJ(); }, 1000);
+            setTimeout(() => { BOT.UseSSJ(); }, 5000);
         } else {
             if (BOT.path[0].x > GAME.char_data.x-1 && BOT.path[0].y == GAME.char_data.y-1) {
                 BOT.emit({a:4,dir:7,vo:GAME.map_options.vo}); // prawo
@@ -290,7 +290,7 @@ GAME.socket.on('gr', (res) => {
     } else if (!BOT.stop && res.a === 12 && res.type === 14) { // Use senzu respone
         setTimeout(() => { BOT.Go(); }, 1000);
     } else if (!BOT.stop && res.a === 18 && res.ssj) { // Use ssj response
-        setTimeout(() => { BOT.Go(); }, 1000);
+        setTimeout(() => { BOT.Go(); }, 2000);
     } else if (!BOT.stop && res.a === 12 && res.type === 19) { // Use sub respone
         setTimeout(() => { BOT.Go(); }, 1000);
     } else if (!this.stop && res.a === undefined) {
@@ -347,8 +347,8 @@ console.clear();
 console.log('%cSkrypt został poprawnie załadowany!','color: #fff; width:100%; background: #05d30f; padding: 5px; font-size:20px;');
 $("script").last().remove();
 
-const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489,409292,476597,479357,465593,477259,291156,322483,480606,462458,433094,458895,345396,301296,414783,453948,480816,462824,481184,480844,480287,481355];
-//291156 - Naruto, 322483, 480606 - Goldas, 462458, 433094 - BaronCorbin, 458895 - Krast, 345396 - Nordex, 301296 - Trybik, 414783 - Gildarts, 453948 - ares, 480816 - essiu, 462824 - cadoro, 481184 - pawelma, 480844 - Ryder (do końca października) 480287 - Gokukowsky, 481355 - Oxari
+const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489,409292,476597,479357,465593,477259,291156,322483,480606,462458,433094,458895,345396,301296,414783,453948,480816,462824,481184,480844,480287,481355,477658];
+//291156 - Naruto, 322483, 480606 - Goldas, 462458, 433094 - BaronCorbin, 458895 - Krast, 345396 - Nordex, 301296 - Trybik, 414783 - Gildarts, 453948 - ares, 480816 - essiu, 462824 - cadoro, 481184 - pawelma, 480844 - Ryder (do końca października) 480287 - Gokukowsky, 481355 - Oxari (Slash), 477658 - xMore
 if (!bot_auth.includes(GAME.pid)) {
     $("#BOT_Panel").remove();
     delete  BOT;
