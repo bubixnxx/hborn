@@ -347,8 +347,8 @@ console.clear();
 console.log('%cSkrypt został poprawnie załadowany!','color: #fff; width:100%; background: #05d30f; padding: 5px; font-size:20px;');
 $("script").last().remove();
 
-const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489,409292,476597,479357,465593,477259,291156,322483,480606,462458,433094,458895,345396,301296,414783,453948,480816,462824,481184,480844,480287,481355,477658];
-//291156 - Naruto, 322483, 480606 - Goldas, 462458, 433094 - BaronCorbin, 458895 - Krast, 345396 - Nordex, 301296 - Trybik, 414783 - Gildarts, 453948 - ares, 480816 - essiu, 462824 - cadoro, 481184 - pawelma, 480844 - Ryder (do końca października) 480287 - Gokukowsky, 481355 - Oxari (Slash), 477658 - xMore
+const bot_auth = [448639,457638,433273,464892,468932,442405,421729,432743,476609,454758,424489,409292,476597,479357,465593,477259,291156,322483,480606,462458,433094,458895,345396,301296,414783,453948,480816,462824,481184,480844,480287,481355,477658,271757];
+//291156 - Naruto, 322483, 480606 - Goldas, 462458, 433094 - BaronCorbin, 458895 - Krast, 345396 - Nordex, 301296 - Trybik, 414783 - Gildarts, 453948 - ares, 480816 - essiu, 462824 - cadoro, 481184 - pawelma, 480844 - Ryder (do końca października) 480287 - Gokukowsky, 481355 - Oxari (Slash), 477658 - xMore, 271757 - Naimad
 if (!bot_auth.includes(GAME.pid)) {
     $("#BOT_Panel").remove();
     delete  BOT;
