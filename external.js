@@ -141,7 +141,7 @@ BOT.Move = () => {
             setTimeout(() => { BOT.UseSub(); }, 1000);
         } else if ($('#ssj_status').text() == "--:--:--") {
             setTimeout(() => { BOT.CancelSSJ(); }, 1000);
-        } else if (BOT.char.ssj && ($("#ssj_bar").css("display") === "none" || $('#ssj_status').text() == "--:--:--")) {
+        } else if (BOT.char.ssj && $("#ssj_bar").css("display") === "none") {
             setTimeout(() => { BOT.UseSSJ(); }, 3000);
         } else {
             if (BOT.path[0].x > GAME.char_data.x-1 && BOT.path[0].y == GAME.char_data.y-1) {
