@@ -140,7 +140,7 @@ BOT.Move = () => {
         } else if (BOT.sub.use && $("#doubler_bar").css("display") === "none") {
             setTimeout(() => { BOT.UseSub(); }, 1000);
         } else if ($('#ssj_status').text() == "--:--:--") {
-            setTimeout(() => { BOT.CancelSSJ(); }, 1000);
+            setTimeout(() => { BOT.CancelSSJ(); }, 1000); console.log("cancel ssj");
         } else if (BOT.char.ssj && $("#ssj_bar").css("display") === "none") {
             setTimeout(() => { BOT.UseSSJ(); }, 3000);
         } else {
@@ -298,7 +298,7 @@ GAME.socket.on('gr', (res) => {
     } else if (!BOT.stop && res.a === 18 && res.ssj) { // Use ssj response
         setTimeout(() => { BOT.Go(); }, 2000);
     } else if (!BOT.stop && res.a === 18 && res.cancel_ssj) { // Use cancel ssj response
-        setTimeout(() => { BOT.Go(); }, 1000);
+        setTimeout(() => { BOT.UseSSJ(); }, 1000); console.log("cancel ssj response");
     }  else if (!BOT.stop && res.a === 12 && res.type === 19) { // Use sub respone
         setTimeout(() => { BOT.Go(); }, 1000);
     } else if (!this.stop && res.a === undefined) {
